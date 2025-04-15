@@ -9,97 +9,100 @@
 
 /* Reduce Navbar Padding */
 #main-navbar {
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-  
-  /* Logo Size */
-  #site-logo {
-    height: 40px; /* Adjust to desired size */
-    width: auto;
-  }
-  
-  /* Nav Links Spacing */
-  #nav-links .nav-link {
-    padding: 0 10px;
-    font-size: 15px; /* Optional: reduce font size */
-  }
-  .custom-navbar {
-    background: linear-gradient(to right, #2b2b2b, #a29f9f);
-    padding: 10px 20px;
-  }
-  
-  /* Logo styling */
-  .logo {
-    height: 40px;
-  }
-  
-  /* Search Bar */
-  .search-container {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 50px;
-    padding: 5px 10px;
-    margin-left: 20px;
-  }
-  
-  .search-input {
-    border: none;
-    outline: none;
-    padding: 5px 10px;
-    border-radius: 50px;
-  }
-  
-  .search-button {
-    background: none;
-    border: none;
-    color: orange;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-  
-  /* Icons */
-  .nav-icons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .icon-container {
-    position: relative;
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .icon-container:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
-  }
-  
-  .cart-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background-color: #00cfff;
-    color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 50%;
-    line-height: 1;
-    min-width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Footer Styling */
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* Logo Size */
+#site-logo {
+  height: 40px;
+  /* Adjust to desired size */
+  width: auto;
+}
+
+/* Nav Links Spacing */
+#nav-links .nav-link {
+  padding: 0 10px;
+  font-size: 15px;
+  /* Optional: reduce font size */
+}
+
+.custom-navbar {
+  background: linear-gradient(to right, #2b2b2b, #a29f9f);
+  padding: 10px 20px;
+}
+
+/* Logo styling */
+.logo {
+  height: 40px;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 50px;
+  padding: 5px 10px;
+  margin-left: 20px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 50px;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  color: orange;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Icons */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-container {
+  position: relative;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #00cfff;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  line-height: 1;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer Styling */
 
 .footer {
   text-align: center;
@@ -108,35 +111,44 @@
 
 /* Footer Logo Styling */
 .footer-logo {
-  max-width: 180px; /* Adjust size for readability */
+  max-width: 180px;
+  /* Adjust size for readability */
   height: auto;
   display: block;
-  margin-bottom: 15px; /* Add spacing */
-  filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2)); /* Glow effect */
+  margin-bottom: 15px;
+  /* Add spacing */
+  filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2));
+  /* Glow effect */
   transition: transform 0.3s ease-in-out;
 }
 
 /* Hover effect for interactivity */
 .footer-logo:hover {
-  transform: scale(1.05); /* Slight zoom-in effect */
+  transform: scale(1.05);
+  /* Slight zoom-in effect */
 }
 
 
 /* Company Info Styling */
 .company-info {
-  font-size: 0.95rem; /* Slightly larger font for better readability */
-  line-height: 1.6; /* Increase line height for spacing */
-  color: #f1f1f1; /* Light gray for better contrast */
+  font-size: 0.95rem;
+  /* Slightly larger font for better readability */
+  line-height: 1.6;
+  /* Increase line height for spacing */
+  color: #f1f1f1;
+  /* Light gray for better contrast */
 }
 
 .company-info i {
   font-size: 1.2rem;
-  color: #f8b400; /* Highlight icons with a gold color */
+  color: #f8b400;
+  /* Highlight icons with a gold color */
   margin-right: 8px;
 }
 
 .company-info br {
-  margin-bottom: 5px; /* Add spacing between lines */
+  margin-bottom: 5px;
+  /* Add spacing between lines */
 }
 
 
@@ -190,7 +202,8 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #25D366; /* WhatsApp green */
+  background-color: #25D366;
+  /* WhatsApp green */
   color: white;
   font-size: 24px;
   width: 50px;
@@ -206,31 +219,46 @@
 }
 
 .whatsapp-float:hover {
-  background-color: #1ebe5d; /* Slightly darker green */
+  background-color: #1ebe5d;
+  /* Slightly darker green */
   transform: scale(1.1);
 }
 
 /* Responsive: Adjust position on smaller screens */
 @media (max-width: 600px) {
   .whatsapp-float {
-      bottom: 15px;
-      right: 15px;
-      width: 45px;
-      height: 45px;
-      font-size: 22px;
+    bottom: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
   }
 }
 
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 
@@ -241,7 +269,8 @@
 }
 
 /* Banner Section Styling */
-#Small-Banner, #Banner3 {
+#Small-Banner,
+#Banner3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -252,7 +281,8 @@
 .Banner-box {
   flex: 1;
   min-width: 280px;
-  background: linear-gradient(135deg, #ff6a00, #ee0979); /* Vibrant gradient */
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  /* Vibrant gradient */
   color: white;
   padding: 40px 20px;
   border-radius: 10px;
@@ -308,14 +338,16 @@
 
 /* Individual Box Backgrounds */
 .Banner-box1 {
-  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue Gradient */
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  /* Blue Gradient */
 }
 
 .Banner-box2 {
-  background: linear-gradient(135deg, #009245, #fcee21); /* Green-Yellow Gradient */
+  background: linear-gradient(135deg, #009245, #fcee21);
+  /* Green-Yellow Gradient */
 }
 
 .Banner-box3 {
-  background: linear-gradient(135deg, #654ea3, #eaafc8); /* Purple-Pink Gradient */
+  background: linear-gradient(135deg, #654ea3, #eaafc8);
+  /* Purple-Pink Gradient */
 }
-
