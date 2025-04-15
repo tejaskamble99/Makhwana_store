@@ -99,3 +99,223 @@
     justify-content: center;
   }
   
+  /* Footer Styling */
+
+.footer {
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Footer Logo Styling */
+.footer-logo {
+  max-width: 180px; /* Adjust size for readability */
+  height: auto;
+  display: block;
+  margin-bottom: 15px; /* Add spacing */
+  filter: drop-shadow(2px 2px 10px rgba(255, 255, 255, 0.2)); /* Glow effect */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for interactivity */
+.footer-logo:hover {
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+
+/* Company Info Styling */
+.company-info {
+  font-size: 0.95rem; /* Slightly larger font for better readability */
+  line-height: 1.6; /* Increase line height for spacing */
+  color: #f1f1f1; /* Light gray for better contrast */
+}
+
+.company-info i {
+  font-size: 1.2rem;
+  color: #f8b400; /* Highlight icons with a gold color */
+  margin-right: 8px;
+}
+
+.company-info br {
+  margin-bottom: 5px; /* Add spacing between lines */
+}
+
+
+/* Footer Links */
+.footer-link {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  padding: 5px 0;
+  color: #ffffff;
+  transition: transform 0.3s ease-in-out, color 0.3s;
+}
+
+.footer-link i {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+.footer-link:hover {
+  transform: translateX(5px);
+  color: #f8b400;
+}
+
+/* Instagram Icon Below Company Info */
+.social-icon {
+  font-size: 1.8rem;
+  color: #ffffff;
+  transition: color 0.3s ease-in-out, transform 0.3s;
+  display: block;
+  margin-top: 10px;
+}
+
+.social-icon:hover {
+  color: #f8b400;
+  transform: scale(1.2);
+}
+
+/* Payment Icons */
+.payment-icon {
+  width: 50px;
+  margin: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.payment-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366; /* WhatsApp green */
+  color: white;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 1000;
+}
+
+.whatsapp-float:hover {
+  background-color: #1ebe5d; /* Slightly darker green */
+  transform: scale(1.1);
+}
+
+/* Responsive: Adjust position on smaller screens */
+@media (max-width: 600px) {
+  .whatsapp-float {
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+      height: 45px;
+      font-size: 22px;
+  }
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+
+/* Section Padding */
+.section-p1 {
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* Banner Section Styling */
+#Small-Banner, #Banner3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  text-align: center;
+}
+
+.Banner-box {
+  flex: 1;
+  min-width: 280px;
+  background: linear-gradient(135deg, #ff6a00, #ee0979); /* Vibrant gradient */
+  color: white;
+  padding: 40px 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+.Banner-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Heading & Text Styles */
+.Banner-box h4 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.Banner-box h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.Banner-box span {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* White Button Styling */
+.white {
+  display: inline-block;
+  padding: 10px 20px;
+  background: white;
+  color: #ff6a00;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.white:hover {
+  background: #ff6a00;
+  color: white;
+}
+
+/* Individual Box Backgrounds */
+.Banner-box1 {
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue Gradient */
+}
+
+.Banner-box2 {
+  background: linear-gradient(135deg, #009245, #fcee21); /* Green-Yellow Gradient */
+}
+
+.Banner-box3 {
+  background: linear-gradient(135deg, #654ea3, #eaafc8); /* Purple-Pink Gradient */
+}
+
