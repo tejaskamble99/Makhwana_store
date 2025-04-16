@@ -1,0 +1,15 @@
+.product-detail-page img {
+    border-radius: 12px;
+    max-height: 500px;
+    object-fit: contain;
+  }
+  
+  .product-detail-page h2 {
+    font-weight: 600;
+  }
+  
+  .product-detail-page button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  

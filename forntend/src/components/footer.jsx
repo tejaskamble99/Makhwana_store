@@ -6,29 +6,31 @@ function Footer() {
       <footer className="footer bg-dark text-light pt-5 pb-3">
         <div className="container">
           <div className="row text-center text-md-start">
+            {/* Contact Info */}
             <div className="col-md-3 mb-3">
               <img
-                src="Images/Logo.png"
+                src="../assets/Images/Logo.png"
                 alt="MakwanaStore"
                 className="footer-logo"
               />
               <p className="company-info">
-                <i className="bi bi-geo-alt"></i>Borivali Magathane Depot
+                <i className="bi bi-geo-alt"></i> Borivali Magathane Depot
                 <br />
-                <i className="bi bi-telephone"></i>+91 9152100750
+                <i className="bi bi-telephone"></i> +91 9152100750
                 <br />
-                <i className="bi bi-envelope"></i>info@makwanastore.com
+                <i className="bi bi-envelope"></i> info@makwanastore.com
               </p>
-              {/* <!-- Instagram Icon Below Company Info --> */}
               <a
                 href="https://www.instagram.com/makwanastore.com_fashion/?igsh=ZjN3cm1rZzdpcW4z"
                 className="social-icon"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <i className="bi bi-instagram"></i>
               </a>
             </div>
 
-            {/* <- Quick Links -->!- */}
+            {/* Quick Links */}
             <div className="col-md-3 mb-3">
               <h3 className="fw-bold">Quick Links</h3>
               <ul className="list-unstyled">
@@ -55,7 +57,7 @@ function Footer() {
               </ul>
             </div>
 
-            {/* <!-- Useful Links --> */}
+            {/* Useful Links */}
             <div className="col-md-3 mb-3">
               <h3 className="fw-bold">Useful Links</h3>
               <ul className="list-unstyled">
@@ -83,21 +85,21 @@ function Footer() {
               </ul>
             </div>
 
-            {/* <!-- Payment Methods --> */}
+            {/* Payment Methods */}
             <div className="col-md-3 mb-3">
               <h3 className="fw-bold">We Accept</h3>
               <img
-                src="Images/Pay/Visa.png"
+                src="../assets/Images/Pay/Visa.png"
                 alt="Visa"
                 className="payment-icon"
               />
               <img
-                src="Images/Pay/Mastercard.png"
+                src="../assets/Images/Pay/Mastercard.png"
                 alt="MasterCard"
                 className="payment-icon"
               />
               <img
-                src="Images/Pay/RazorPay.png"
+                src="../assets/Images/Pay/RazorPay.png"
                 alt="RazorPay"
                 className="payment-icon"
               />
@@ -105,17 +107,18 @@ function Footer() {
           </div>
         </div>
 
-        <div className="copyright">
+        <div className="copyright text-center mt-4">
           © 2025 <span className="fw-bold">MakwanaStore</span> | All Rights
           Reserved
         </div>
       </footer>
-      {/* 
-    <!-- Floating WhatsApp Button --> */}
+
+      {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/9152100750"
         className="whatsapp-float"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <i className="bi bi-whatsapp"></i>
       </a>

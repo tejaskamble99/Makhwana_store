@@ -1,0 +1,19 @@
+.shop-container {
+    background-color: #f8f9fa;
+  }
+  
+  .product-card {
+    transition: transform 0.2s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .product-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .product-image {
+    height: 250px;
+    object-fit: cover;
+  }
+  

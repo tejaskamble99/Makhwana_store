@@ -18,7 +18,10 @@ const Header = () => {
           <Nav className="ms-auto align-items-center" id="nav-links">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
 
-            <NavDropdown title="Shop" id="shopDropdown">
+            <NavDropdown
+              title={<span><Link to="/shop" className="text-decoration-none text-dark">Shop</Link></span>}
+              id="shopDropdown"
+            >
               <NavDropdown.Item as={Link} to="/shop/men">Men</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/women">Women</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/kids">Kids</NavDropdown.Item>
