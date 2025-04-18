@@ -1,0 +1,137 @@
+.about-hero {
+    background: url('Images/Banner/3-2.jpg') center/cover no-repeat;
+    min-height: 40vh;
+    /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+/* Dark overlay for better text visibility */
+.about-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Ensuring text is above overlay */
+.about-hero h2 {
+    position: relative;
+    z-index: 2;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    max-width: 90%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .about-hero {
+        min-height: 50vh;
+    }
+
+    .about-hero h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: 40vh;
+        padding: 10px;
+    }
+
+    .about-hero h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero {
+        min-height: 35vh;
+    }
+
+    .about-hero h2 {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+/* About Us Section */
+.about-section {
+    background: white;
+    padding: 80px 20px;
+    text-align: left;
+}
+
+.about-img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-img:hover {
+    transform: scale(1.05);
+}
+
+.about-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.about-container h2 {
+    color: #ff758c;
+    font-size: 1.8rem;
+    margin-top: 20px;
+}
+
+.about-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.about-container ul li {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* CTA Button */
+.cta-btn {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.cta-btn:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-section {
+        text-align: center;
+    }
+
+    .about-container h1 {
+        font-size: 2rem;
+    }
+
+    .about-container h2 {
+        font-size: 1.5rem;
+    }
+}
