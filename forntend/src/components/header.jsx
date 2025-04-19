@@ -18,14 +18,13 @@ const Header = () => {
           <Nav className="ms-auto align-items-center" id="nav-links">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
 
-            <NavDropdown
-              title={<span><Link to="/shop" className="text-decoration-none text-dark">Shop</Link></span>}
-              id="shopDropdown"
-            >
+            <NavDropdown title="Shop" id="shopDropdown">
               <NavDropdown.Item as={Link} to="/shop/men">Men</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/women">Women</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/kids">Kids</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/accessories">Accessories</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item as={Link} to="/shop">View All</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link as={Link} to="/about">About Us</Nav.Link>
@@ -40,10 +39,11 @@ const Header = () => {
             {/* Icons */}
             <div className="nav-icons">
               <div className="icon-container"><FaUser /></div>
-              <div className="icon-container">
+              <Nav.Link as={Link} to="/cart"> <div className="icon-container">
                 <FaShoppingBag />
                 <span className="cart-badge">1</span>
-              </div>
+              </div></Nav.Link>
+
             </div>
           </Nav>
         </Navbar.Collapse>

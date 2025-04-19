@@ -1,17 +1,16 @@
 [
-    {
-      "id": 1,
-      "name": "Stylish T-shirt",
-      "price": 499,
-      "image": "Images/products/tshirt1.png",
-      "category": "Men"
-    },
-    {
-      "id": 2,
-      "name": "Elegant Dress",
-      "price": 999,
-      "image": "Images/products/dress1.png",
-      "category": "Women"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "name": "Customised_Tshirt",
+    "price": 450,
+    "image": "Images/Products/T-shirt.png",
+    "category": "Men"
+  },
+  {
+    "id": 2,
+    "name": "Elegant Dress",
+    "price": 999,
+    "image": "Images/products/dress1.png",
+    "category": "Women"
+  }
+]

@@ -2,7 +2,7 @@ import { FaPlus } from "react-icons/fa";
 
 const server = "https://www.myimaginestore.com"; // Replace with your actual server URL
 
-const ProductCard = ({ productID, price, name, photo, stock, handler }) => {
+const Products = ({ productID, price, name, photo, stock, handler }) => {
   return (
     <div className="pcard">
       <img src={`${server}/${photo}`} alt={name} className="product-image" />
@@ -19,4 +19,4 @@ const ProductCard = ({ productID, price, name, photo, stock, handler }) => {
   );
 };
 
-export default ProductCard;
+export default Products;

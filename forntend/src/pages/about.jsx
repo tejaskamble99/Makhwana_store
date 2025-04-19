@@ -8,7 +8,7 @@ const about = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6">
-              <img src="Images/rb_124.png" alt="About Us" className="about-img fade-in " />
+              <img src="../assets/Images/rb_124.png" alt="About Us" className="about-img fade-in " />
             </div>
             <div className="col-md-6 about-container">
               <h1>About Us</h1>
