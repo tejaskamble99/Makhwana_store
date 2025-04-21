@@ -4,8 +4,10 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { FaSearch, FaUser, FaShoppingBag } from 'react-icons/fa';
 import logo from '../assets/Images/Logo.png';
 import '../App.css';
+import { useProducts } from '../context/productContext';
 
 const Header = () => {
+  const { cart } = useProducts();
   return (
     <Navbar className="custom-navbar" expand="lg" variant="dark">
       <Container>
@@ -41,7 +43,12 @@ const Header = () => {
               <div className="icon-container"><FaUser /></div>
               <Nav.Link as={Link} to="/cart"> <div className="icon-container">
                 <FaShoppingBag />
-                <span className="cart-badge">1</span>
+                {cart.length > 0 && (
+                  <span className="cart-badge">
+                    {cart.reduce((total, item) => total + item.quantity, 0)}
+                  </span>
+                )}
+                {/* {cart.length > 0 && <span className="cart-badge">{cart.length}</span>} */}
               </div></Nav.Link>
 
             </div>

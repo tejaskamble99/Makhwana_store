@@ -7,6 +7,16 @@
   font-family: "League Spartan", serif;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
 /* Reduce Navbar Padding */
 #main-navbar {
   padding-top: 8px;
