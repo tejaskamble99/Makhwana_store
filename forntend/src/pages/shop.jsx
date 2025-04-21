@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import productData from "../productDetail.json";
 import { Link } from "react-router-dom";
 import "../styles/shop.css"; // Create this for styling
+import ProductList from '../components/Products';
 
 function Shop() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,8 @@ function Shop() {
           </div>
         ))}
       </div>
+      <h1>Products</h1>
+      <ProductList />
     </div>
   );
 }
