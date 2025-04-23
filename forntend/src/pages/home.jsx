@@ -1,8 +1,10 @@
 import React from "react";
 import "../styles/home.css";
 import { Link } from "react-router-dom";
+import { useProducts } from "../context/productContext";
 
 const Home = () => {
+  const { products, addToCart } = useProducts();
   return (
     <>
       <div className="home">
@@ -16,19 +18,16 @@ const Home = () => {
           </div>
         </div>
       </div>
+             
       <section id="product1" className="section-p1">
-        <h2>Featured Products</h2>
-        <div className="pro-container">
-          <div className="pro" onclick="window.location.href='Sproduct.html';">
-            <img
-              src="./Images/Products/Customised_Wallet.jpeg"
-              alt="Custom Wallet"
-            />
+      <h2>Featured Products</h2>
+      <div className="pro-container">
+        {products.map((product) => (
+          <div className="pro" key={product.id}>
+            <img src={product.image} alt={product.name} />
             <div className="des">
-              <span>Makwana Store</span>
-              <h5>
-                Personalized Men's Wallet_Eyewear case_Keychain_Metal Pen Combo
-              </h5>
+              <span>{product.brand}</span>
+              <h5>{product.name}</h5>
               <div className="star">
                 <i className="bx bxs-star"></i>
                 <i className="bx bxs-star"></i>
@@ -36,188 +35,15 @@ const Home = () => {
                 <i className="bx bxs-star"></i>
                 <i className="bx bxs-star"></i>
               </div>
-              <h4>INR 1,500</h4>
+              <h4>INR {product.price}</h4>
             </div>
-            <a
-              href="#"
-              onclick="addToCart('Custom Wallet', 'Images/Products/Customised_Wallet.jpeg', 1500)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
+            <span onClick={() => addToCart(product)} style={{ cursor: 'pointer' }}>
+  <i className="bx bx-cart cart"></i>
+</span>
           </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Tshirt_Details.html';"
-          >
-            <img src="./Images/Products/T-shirt.png" alt="Custom T_Shirt" />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Customised_Tshirt</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 450</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Customised_Tshirt','Images/Products/T-Shirt.png', 450)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Coffee_Mug.html';"
-          >
-            <img
-              src="./Images/Products/Mug_Kit.jpeg"
-              alt="Customised_Mug_Kit"
-            />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Customizable Gift Mug with Name and Picture</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 1,080</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Customised_Mug_Kit', 'Images/Products/Mug_Kit.jpeg', 1080)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Women_parker.html';"
-          >
-            <img src="./Images/Products/Parker.jpg" alt="Saree_Parker" />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Women Saree Parker</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 250</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Saree_Parker','Images/Products/Parker.jpg', 250)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Women_Nighty.html';"
-          >
-            <img src="./Images/Products/Nighty.jpg" alt="Women_Nighty" />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Women Nighty</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 350</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Women_Nighty','Images/Products/Nighty.jpg', 350)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Shoes_Details.html';"
-          >
-            <img src="./Images/Products/Shoes.png" alt="Shoes" />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Casual Shoes</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 2,250</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Shoes','Images/Products/Shoes.png', 2250)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div
-            className="pro"
-            onclick="window.location.href='Wooden_Frame.html';"
-          >
-            <img
-              src="./Images/Products/Wood.jpg"
-              alt="Customised_Wooden_Board"
-            />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Customised_Wooden_Board</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 1,250</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Customised_Wooden_Board', 'Images/Products/Wood.jpg', 1250)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-          <div className="pro" onclick="window.location.href='Googles.html';">
-            <img src="./Images/Products/Gogals.jpg" alt="Googles" />
-            <div className="des">
-              <span>Makwana Store</span>
-              <h5>Goggles</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR 350</h4>
-            </div>
-            <a
-              href="#"
-              onclick="addToCart('Googles','Images/Products/Gogals.jpg', 350)"
-            >
-              <i className="bx bx-cart cart"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </section>
 
       <header className="banner">
         <div className="container text-center">

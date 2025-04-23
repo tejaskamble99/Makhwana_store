@@ -1,16 +1,58 @@
 [
   {
     "id": 1,
-    "name": "Customised_Tshirt",
-    "price": 350,
+    "name": "Personalized Men's Wallet_Eyewear case_Keychain_Metal Pen Combo",
+    "price": 1500,
     "image": "Images/Products/T-shirt.png",
     "category": "Men"
   },
   {
     "id": 2,
-    "name": "Elegant Dress",
-    "price": 999,
+    "name": "Customised_Tshirt",
+    "price": 450,
+    "image": "Images/products/dress1.png",
+    "category": "men"
+  },
+  {
+    "id": 3,
+    "name": "Customizable Gift Mug with Name and Picture",
+    "price":1080,
     "image": "Images/products/dress1.png",
     "category": "Women"
+  },
+  {
+    "id": 4,
+    "name": "Women Saree Parker",
+    "price": 250,
+    "image": "Images/products/dress1.png",
+    "category": "Women"
+  },
+  {
+    "id": 5,
+    "name": "Women Nighty",
+    "price":350,
+    "image": "Images/products/dress1.png",
+    "category": "Women"
+  },
+  {
+    "id": 6,
+    "name": "Casual Shoes",
+    "price": 2250,
+    "image": "Images/products/dress1.png",
+    "category": "Women"
+  },
+  {
+    "id": 7,
+    "name": "Customised_Wooden_Board",
+    "price": 1250,
+    "image": "Images/products/dress1.png",
+    "category": "Women"
+  },
+  {
+    "id": 8,
+    "name": "sunglasses",
+    "price":350,
+    "image": "Images/products/dress1.png",
+    "category": "accessories"
   }
 ]

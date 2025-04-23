@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import productData from "../productDetail.json";
+import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/shop.css"; // Create this for styling
-import ProductList from '../components/Products';
+import "../styles/shop.css";
+import { useProducts } from "../context/productContext";
 
 function Shop() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    setProducts(productData);
-  }, []);
+  const { products, addToCart } = useProducts();
 
   return (
     <div className="shop-container container py-5">
@@ -26,7 +21,16 @@ function Shop() {
               <div className="card-body text-center">
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">₹{product.price}</p>
-                <Link to={`/product/${product.id}`} className="btn btn-dark">
+
+                {/* Add to cart icon-only */}
+                <i
+                  className="bx bx-cart cart"
+                  onClick={() => addToCart(product)}
+                  style={{ cursor: 'pointer' }}
+                ></i>
+
+                {/* View details */}
+                <Link to={`/products/${product.id}`} className="btn btn-dark ms-2">
                   View Details
                 </Link>
               </div>
@@ -34,8 +38,6 @@ function Shop() {
           </div>
         ))}
       </div>
-      <h1>Products</h1>
-      <ProductList />
     </div>
   );
 }
