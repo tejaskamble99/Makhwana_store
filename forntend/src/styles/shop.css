@@ -3,7 +3,7 @@
   }
   
   .product-card {
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease;
     border-radius: 10px;
     overflow: hidden;
   }

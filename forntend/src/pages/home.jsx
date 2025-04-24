@@ -2,11 +2,21 @@ import React from "react";
 import "../styles/home.css";
 import { Link } from "react-router-dom";
 import { useProducts } from "../context/productContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const { products, addToCart } = useProducts();
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    toast.success(`${product.name} added to cart!`);
+  };
+
   return (
     <>
+      <ToastContainer />
+
       <div className="home">
         <div className="hero-content">
           <div className="slide-in">
@@ -18,42 +28,46 @@ const Home = () => {
           </div>
         </div>
       </div>
-             
+
       <section id="product1" className="section-p1">
-      <h2>Featured Products</h2>
-      <div className="pro-container">
-        {products.map((product) => (
-          <div className="pro" key={product.id}>
-            <img src={product.image} alt={product.name} />
-            <div className="des">
-              <span>{product.brand}</span>
-              <h5>{product.name}</h5>
-              <div className="star">
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-                <i className="bx bxs-star"></i>
-              </div>
-              <h4>INR {product.price}</h4>
+        <h2>Featured Products</h2>
+        <div className="pro-container">
+          {products.map((product) => (
+            <div className="pro" key={product.id}>
+              <Link to={`/products/${product.id}`} className="product-link">
+                <img src={product.image} alt={product.name} />
+                <div className="des">
+                  <span>{product.brand}</span>
+                  <h5>{product.name}</h5>
+                  <div className="star">
+                    <i className="bx bxs-star"></i>
+                    <i className="bx bxs-star"></i>
+                    <i className="bx bxs-star"></i>
+                    <i className="bx bxs-star"></i>
+                    <i className="bx bxs-star"></i>
+                  </div>
+                  <h4>INR {product.price}</h4>
+                </div>
+              </Link>
+              <button
+                onClick={() => handleAddToCart(product)}
+                style={{ cursor: "pointer", background: "none", border: "none" }}
+                aria-label={`Add ${product.name} to cart`}
+              >
+                <i className="bx bx-cart cart"></i>
+              </button>
             </div>
-            <span onClick={() => addToCart(product)} style={{ cursor: 'pointer' }}>
-  <i className="bx bx-cart cart"></i>
-</span>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
 
       <header className="banner">
         <div className="container text-center">
           <h1 id="banner-title">🔥 Exclusive Deals Just for You! 🔥</h1>
-          <p id="banner-subtitle">
-            Shop the latest trends at unbeatable prices.
-          </p>
-          <a href="shop.html" className="btn cta-btn">
+          <p id="banner-subtitle">Shop the latest trends at unbeatable prices.</p>
+          <Link to="/shop" className="btn cta-btn">
             Shop Now
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -85,7 +99,7 @@ const Home = () => {
       <div className="container-fluid feature-section">
         <div className="container">
           <div className="row" id="feature-list">
-            {/* <!-- Features will be loaded here dynamically --> */}
+            {/* Features can be dynamically added here */}
           </div>
         </div>
       </div>
