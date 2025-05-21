@@ -1,6 +1,7 @@
-const express = require('express')
+import express from 'express'
+import Color from 'color';
 const app = express()
-const port = 3000
+const port = 5000
 
 
 // you can also use arror function like this app.use((req, res, next) => {});
