@@ -17,17 +17,11 @@ app.get('/', (req, res) => {
 
 
 app.get('/tejas', (req, res) =>{
-  res.send('hi laude');
+  res.send('ahe mi jivanta');
 })
 
 
 
-
-
-
-
-
-
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening  ${process.env.DEV_MODE}  mode on port ${port}`)
 })
