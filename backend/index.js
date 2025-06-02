@@ -1,7 +1,22 @@
-import express from 'express'
-import dotenv from 'dotenv'
+import express from 'express';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import connectDB from './config/db.js';
+
+//configuring dotenv
 dotenv.config();
+
+//database connection
+
+connectDB();
+
+//rest objects
 const app = express()
+
+//middlewares
+app.use(morgan('dev'));
+app.use(express.json());
+
 const port = process.env.PORT || 8080;
 
 
