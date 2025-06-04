@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
+import authRoute from './routes/authRoute.js';
 
 //configuring dotenv
 dotenv.config();
@@ -21,11 +22,15 @@ const port = process.env.PORT || 8080;
 
 
 // you can also use arror function like this app.use((req, res, next) => {});
+//routes
+ app.use('/api/auth', authRoute);
 app.use(function(req,res,next){
 console.log('chalu hai be mai')
 next();
 });
 
+
+// rest api
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })

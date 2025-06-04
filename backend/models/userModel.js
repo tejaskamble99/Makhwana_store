@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
         name: {
             type: String,
             required: true,
+            trim:true
         },
         email: {
             type: String,
@@ -14,8 +15,21 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-    });
+        phone: {
+            type: String,
+            required: true,
+        },
+        address: {
+            type: String,
+            required: true,
+        },
+        role: {
+            type: Number,
+            default: 0, // 0: User, 1: Admin
+            
+        },
+    },{timestamps: true});
     
-    const User = mongoose.model('User', userSchema);
+   
     
-    export default User;
+    export default mongoose.model('User', userSchema);
