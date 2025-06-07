@@ -23,7 +23,8 @@ const port = process.env.PORT || 8080;
 
 // you can also use arror function like this app.use((req, res, next) => {});
 //routes
- app.use('/api/auth', authRoute);
+ app.use('/api/v1/auth', authRoute);
+
 app.use(function(req,res,next){
 console.log('chalu hai be mai')
 next();

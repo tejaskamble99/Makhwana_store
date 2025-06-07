@@ -1,6 +1,7 @@
 import userModel from '../models/userModel.js';
 import { hashPassword } from '../helpers/authHelper.js';
 
+// Register controller
 export const registerController = async (req, res) => {
     try {
         const { name, email, password, phone, address } = req.body;
@@ -73,4 +74,44 @@ export const registerController = async (req, res) => {
             error: error.message,
         });
     }
+};
+
+
+// Login controller
+export const loginController = async (req , res) => {
+    try {
+        const { email, password } = req.body;
+
+        // validate fields
+        if (!email || ! password) {
+            return res.status(404).json({
+                success: false,
+                message: 'Email and password are required',
+
+            })
+        }
+        const match = await userModel.findOne({ email }).select('+password');
+        if (!match) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid credentials',
+            });
+        }
+        const isMatch = await comparePasswords(password, match.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid credentials',
+            });
+        }
+    } 
+    catch(error) {
+        console.log(error);
+        res.staus(500).json({
+            success: false,
+            message: 'An error occurred while logging in',
+            error
+        })
+    }
+
 };
