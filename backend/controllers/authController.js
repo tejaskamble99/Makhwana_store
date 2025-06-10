@@ -1,5 +1,7 @@
 import userModel from '../models/userModel.js';
-import { hashPassword } from '../helpers/authHelper.js';
+import { hashPassword, comparePasswords } from '../helpers/authHelper.js';
+import jwt from 'jsonwebtoken';
+
 
 // Register controller
 export const registerController = async (req, res) => {
@@ -78,40 +80,72 @@ export const registerController = async (req, res) => {
 
 
 // Login controller
-export const loginController = async (req , res) => {
+export const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        // validate fields
-        if (!email || ! password) {
-            return res.status(404).json({
-                success: false,
-                message: 'Email and password are required',
-
-            })
-        }
-        const match = await userModel.findOne({ email }).select('+password');
-        if (!match) {
+        if (!email || !password) {
             return res.status(400).json({
                 success: false,
-                message: 'Invalid credentials',
+                message: 'Email and password are required',
             });
         }
-        const isMatch = await comparePasswords(password, match.password);
+
+        const user = await userModel.findOne({ email }).select('+password');
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        const isMatch = await comparePasswords(password, user.password);
         if (!isMatch) {
             return res.status(400).json({
                 success: false,
                 message: 'Invalid credentials',
             });
         }
-    } 
-    catch(error) {
-        console.log(error);
-        res.staus(500).json({
+
+        // Generate token
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: '7d',
+        });
+         res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            user:{
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                address: user.address
+            },
+            token,
+         })
+        // Set cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none', // or 'lax' if not cross-site
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        const userWithoutPassword = { ...user._doc };
+        delete userWithoutPassword.password;
+
+        res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            user: userWithoutPassword,
+            token,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
             success: false,
             message: 'An error occurred while logging in',
-            error
-        })
+            error: error.message,
+        });
     }
-
 };
