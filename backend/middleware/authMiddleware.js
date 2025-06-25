@@ -1,32 +1,51 @@
 import jwt from 'jsonwebtoken';
 
+// Middleware: Require user to be signed in (JWT token verification)
 export const requireSignIn = async (req, res, next) => {
     try {
-        const decoded = await jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({
+                success: false,
+                message: 'Unauthorized: Token missing or invalid format',
+            });
+        }
+
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         req.user = decoded;
         next();
     } catch (error) {
-        console.error(error);
-        res.status(401).json({ success: false, message: "Unauthorized: Invalid token" });
+        console.error('JWT verification error:', error);
+        res.status(401).json({
+            success: false,
+            message: 'Unauthorized: Invalid token',
+        });
     }
 };
 
-// admin access
+// Middleware: Check if user is admin
 export const isAdmin = async (req, res, next) => {
     try {
         if (req.user && req.user.role === 'admin') {
-            next();
-        } else {
-            return res.status(403).json({
-                success: false,
-                message: "Access denied: Admins only"
-            });
+            return next();
         }
+
+        console.warn(
+            `Access denied for user: ${req.user?.id || 'Unknown User'} - Role: ${req.user?.role}`
+        );
+
+        return res.status(403).json({
+            success: false,
+            message: 'Access denied: Admins only',
+        });
     } catch (error) {
-        console.error("Admin check error:", error);
+        console.error('Admin check error:', error);
         res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: 'Internal server error',
         });
     }
 };
