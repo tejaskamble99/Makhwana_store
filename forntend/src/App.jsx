@@ -9,6 +9,9 @@ import Footer from "./components/footer";
 import ProductDetail from "./components/productDetails";
 import Cart from "./pages/cart"
 import Products from "./components/Products";
+import Register from "./pages/auth/resister";
+import Login from "./pages/auth/login";
+import AuthForm from "./pages/auth/authForm";
 
 
 function App() {
@@ -26,6 +29,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
+          <Route path="/authForm" element={<AuthForm />} />
         </Routes>
       </main>
 

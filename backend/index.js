@@ -3,46 +3,47 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoute from './routes/authRoute.js';
+import cors from 'cors';
 
-//configuring dotenv
+// Configure environment variables
 dotenv.config();
 
-//database connection
-
+// Connect to MongoDB
 connectDB();
 
-//rest objects
-const app = express()
+// Create Express app
+const app = express();
 
-//middlewares
+// Enable CORS
+app.use(cors({
+  origin: 'http://localhost:5173', // frontend React app
+  credentials: true,
+}));
+
+// Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
 
-const port = process.env.PORT || 8080;
+// Routes
+app.use('/api/v1/auth', authRoute);
 
-
-// you can also use arror function like this app.use((req, res, next) => {});
-//routes
- app.use('/api/v1/auth', authRoute);
-
-app.use(function(req,res,next){
-console.log('chalu hai be mai')
-next();
+// Optional custom middleware
+app.use((req, res, next) => {
+  console.log('chalu hai be mai');
+  next();
 });
 
-
-// rest api
+// Test Routes
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
-
-app.get('/tejas', (req, res) =>{
+app.get('/tejas', (req, res) => {
   res.send('ahe mi jivanta');
-})
+});
 
-
-
+// Start Server
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`Example app listening  ${process.env.DEV_MODE}  mode on port ${port}`)
-})
+  console.log(`✅ Server running in ${process.env.DEV_MODE} mode on port ${port}`);
+});
