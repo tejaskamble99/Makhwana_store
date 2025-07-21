@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE = 'http://localhost:8080/api/v1/auth'; // <-- matches your Express backend
+
 const AuthForm = () => {
   const navigate = useNavigate();
 
@@ -36,13 +38,17 @@ const AuthForm = () => {
     e.preventDefault();
     setStatus('Loading...');
 
-    const url = isLogin ? '/api/login' : '/api/register';
+    // Use correct backend API endpoint
+    const url = isLogin
+      ? `${API_BASE}/login`
+      : `${API_BASE}/register`;
 
     try {
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
+        credentials: 'include', // only needed if your backend sends cookies
       });
 
       const data = await res.json();
@@ -115,7 +121,7 @@ const AuthForm = () => {
             </>
           )}
 
-          {/* ✅ Email field – always visible */}
+          {/* Email field */}
           <div>
             <label className="block text-sm font-medium text-gray-900">Email address</label>
             <input
@@ -131,25 +137,25 @@ const AuthForm = () => {
 
           {/* Password */}
           <div className="mb-4">
-  <label className="block text-sm font-medium text-gray-900">Password</label>
-  <div className="relative mt-2">
-    <input
-      name="password"
-      type={showPassword ? 'text' : 'password'}
-      value={formData.password}
-      onChange={handleChange}
-      required
-      autoComplete="current-password"
-      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm pr-10"
-    />
-    <span
-      onClick={() => setShowPassword((prev) => !prev)}
-      className="absolute top-1.5 right-3 text-sm text-indigo-600 cursor-pointer"
-    >
-      {showPassword ? 'Hide' : 'Show'}
-    </span>
-  </div>
-</div>
+            <label className="block text-sm font-medium text-gray-900">Password</label>
+            <div className="relative mt-2">
+              <input
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={handleChange}
+                required
+                autoComplete="current-password"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm pr-10"
+              />
+              <span
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute top-1.5 right-3 text-sm text-indigo-600 cursor-pointer"
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </span>
+            </div>
+          </div>
 
           {/* Submit Button */}
           <div>
