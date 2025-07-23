@@ -30,6 +30,7 @@
   width: auto;
 }
 
+
 /* Nav Links Spacing */
 #nav-links .nav-link {
   padding: 0 10px;
@@ -362,4 +363,4 @@
 .Banner-box3 {
   background: linear-gradient(135deg, #654ea3, #eaafc8);
   /* Purple-Pink Gradient */
-}
+} 

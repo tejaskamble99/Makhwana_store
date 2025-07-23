@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE = 'http://localhost:8080/api/v1/auth'; // <-- matches your Express backend
+const API_BASE = 'http://localhost:8080/api/v1/auth';
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const AuthForm = () => {
     address: '',
   });
   const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,11 +35,28 @@ const AuthForm = () => {
     setStatus('');
   };
 
+  const validateForm = () => {
+    const { name, email, password, phone, address } = formData;
+
+    if (!email.includes('@')) return 'Invalid email format.';
+    if (password.length < 6) return 'Password must be at least 6 characters.';
+    if (!isLogin) {
+      if (name.trim().length < 2) return 'Please enter your full name.';
+      if (!/^\d{10}$/.test(phone)) return 'Phone must be a 10-digit number.';
+      if (address.trim().length < 5) return 'Address must be at least 5 characters.';
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('Loading...');
 
-    // Use correct backend API endpoint
+    const errorMsg = validateForm();
+    if (errorMsg) return setStatus(`❌ ${errorMsg}`);
+
+    setStatus('Loading...');
+    setIsSubmitting(true);
+
     const url = isLogin
       ? `${API_BASE}/login`
       : `${API_BASE}/register`;
@@ -48,7 +66,7 @@ const AuthForm = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
-        credentials: 'include', // only needed if your backend sends cookies
+        credentials: 'include',
       });
 
       const data = await res.json();
@@ -65,6 +83,8 @@ const AuthForm = () => {
       }
     } catch (err) {
       setStatus(`❌ ${err.message}`);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -129,13 +149,14 @@ const AuthForm = () => {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              required
               autoComplete="email"
+              autoFocus
+              required
               className="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm"
             />
           </div>
 
-          {/* Password */}
+          {/* Password field */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-900">Password</label>
             <div className="relative mt-2">
@@ -144,8 +165,8 @@ const AuthForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={formData.password}
                 onChange={handleChange}
-                required
                 autoComplete="current-password"
+                required
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600 sm:text-sm pr-10"
               />
               <span
@@ -157,13 +178,15 @@ const AuthForm = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              disabled={isSubmitting}
+              className={`flex w-full justify-center rounded-md ${
+                isSubmitting ? 'bg-indigo-400' : 'bg-indigo-600 hover:bg-indigo-500'
+              } px-3 py-1.5 text-sm font-semibold text-white shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
             >
-              {isLogin ? 'Sign In' : 'Register'}
+              {isSubmitting ? 'Please wait...' : isLogin ? 'Sign In' : 'Register'}
             </button>
           </div>
         </form>

@@ -8,6 +8,7 @@ import { useProducts } from '../context/productContext';
 
 const Header = () => {
   const { cart } = useProducts();
+
   return (
     <Navbar className="custom-navbar" expand="lg" variant="dark">
       <Container>
@@ -20,7 +21,7 @@ const Header = () => {
           <Nav className="ms-auto align-items-center" id="nav-links">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
 
-            <NavDropdown title='Shop' to="/shop" id="shopDropdown" >
+            <NavDropdown title='Shop' id="shopDropdown">
               <NavDropdown.Item as={Link} to="/shop/men">Men</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/women">Women</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/shop/kids">Kids</NavDropdown.Item>
@@ -33,24 +34,36 @@ const Header = () => {
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
             {/* Search */}
-            <div className="search-container">
+            <div className="search-container d-flex align-items-center">
               <input type="text" placeholder="Search products..." className="search-input" />
               <button className="search-button"><FaSearch /></button>
             </div>
 
             {/* Icons */}
-            <div className="nav-icons">
-              <div className="icon-container"><FaUser /></div>
-              <Nav.Link as={Link} to="/cart"> <div className="icon-container">
-                <FaShoppingBag />
-                {cart.length > 0 && (
-                  <span className="cart-badge">
-                    {cart.reduce((total, item) => total + item.quantity, 0)}
-                  </span>
-                )}
-                {/* {cart.length > 0 && <span className="cart-badge">{cart.length}</span>} */}
-              </div></Nav.Link>
+            <div className="nav-icons d-flex align-items-center ms-3">
+              {/* User Icon Dropdown */}
+              <NavDropdown
+                align="end"
+                title={<FaUser style={{ fontSize: '18px', color: '#ccc' }} />}
+                id="userDropdown"
+                className="user-dropdown"
+                drop="down-centered"
+              >
+                <NavDropdown.Item as={Link} to="/authForm">Login</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/authForm">Register</NavDropdown.Item>
+              </NavDropdown>
 
+              {/* Cart Icon */}
+              <Nav.Link as={Link} to="/cart">
+                <div className="icon-container position-relative">
+                  <FaShoppingBag style={{ fontSize: '18px', color: '#ccc' }} />
+                  {cart.length > 0 && (
+                    <span className="cart-badge">
+                      {cart.reduce((total, item) => total + item.quantity, 0)}
+                    </span>
+                  )}
+                </div>
+              </Nav.Link>
             </div>
           </Nav>
         </Navbar.Collapse>
