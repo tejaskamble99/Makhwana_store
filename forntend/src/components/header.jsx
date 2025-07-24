@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { FaSearch, FaUser, FaShoppingBag } from 'react-icons/fa';
 import logo from '../assets/Images/Logo.png';
@@ -8,6 +8,15 @@ import { useProducts } from '../context/productContext';
 
 const Header = () => {
   const { cart } = useProducts();
+  const navigate = useNavigate();
+
+  const isLoggedIn = !!localStorage.getItem('token');
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/authForm'); // or navigate('/')
+    window.location.reload(); // optional: force reload to update header UI
+  };
 
   return (
     <Navbar className="custom-navbar" expand="lg" variant="dark">
@@ -49,8 +58,14 @@ const Header = () => {
                 className="user-dropdown"
                 drop="down-centered"
               >
-                <NavDropdown.Item as={Link} to="/authForm">Login</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/authForm">Register</NavDropdown.Item>
+                {!isLoggedIn ? (
+                  <>
+                    <NavDropdown.Item as={Link} to="/authForm">Login</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/authForm">Register</NavDropdown.Item>
+                  </>
+                ) : (
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                )}
               </NavDropdown>
 
               {/* Cart Icon */}

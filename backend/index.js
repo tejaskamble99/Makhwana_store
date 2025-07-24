@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoute from './routes/authRoute.js';
+import productRoutes from './routes/productRoutes.js';
 import cors from 'cors';
 
 // Configure environment variables
@@ -27,6 +28,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/v1/auth', authRoute);
+app.use("/api/v1/products", productRoutes);
 
 // Optional custom middleware
 app.use((req, res, next) => {

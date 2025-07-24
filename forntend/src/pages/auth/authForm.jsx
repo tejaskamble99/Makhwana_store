@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import logo from '../../assets/Images/Logo.png';
 
 const API_BASE = 'http://localhost:8080/api/v1/auth';
 
@@ -15,7 +17,6 @@ const AuthForm = () => {
     phone: '',
     address: '',
   });
-  const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
@@ -32,7 +33,6 @@ const AuthForm = () => {
       phone: '',
       address: '',
     });
-    setStatus('');
   };
 
   const validateForm = () => {
@@ -52,9 +52,11 @@ const AuthForm = () => {
     e.preventDefault();
 
     const errorMsg = validateForm();
-    if (errorMsg) return setStatus(`❌ ${errorMsg}`);
+    if (errorMsg) {
+      toast.error(errorMsg);
+      return;
+    }
 
-    setStatus('Loading...');
     setIsSubmitting(true);
 
     const url = isLogin
@@ -75,14 +77,14 @@ const AuthForm = () => {
 
       if (isLogin) {
         localStorage.setItem('token', data.token);
-        setStatus('✅ Login successful! Redirecting...');
+        toast.success('Login successful! Redirecting...');
         setTimeout(() => navigate('/'), 1000);
       } else {
-        setStatus('✅ Registration successful! You can now log in.');
+        toast.success('Registration successful! You can now log in.');
         setIsLogin(true);
       }
     } catch (err) {
-      setStatus(`❌ ${err.message}`);
+      toast.error(err.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -93,7 +95,7 @@ const AuthForm = () => {
       <div className="w-full max-w-md">
         <img
           className="mx-auto h-10 w-auto"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+          src= {logo}
           alt="Your Company"
         />
         <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
@@ -201,10 +203,6 @@ const AuthForm = () => {
             {isLogin ? 'Register here' : 'Login here'}
           </button>
         </p>
-
-        {status && (
-          <p className="mt-4 text-center text-sm font-medium text-gray-700">{status}</p>
-        )}
       </div>
     </div>
   );
