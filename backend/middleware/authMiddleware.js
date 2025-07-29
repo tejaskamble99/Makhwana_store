@@ -19,22 +19,22 @@ export const requireSignIn = async (req, res, next) => {
         next();
     } catch (error) {
         console.error('JWT verification error:', error);
-        res.status(401).json({
+        return res.status(401).json({
             success: false,
-            message: 'Unauthorized: Invalid token',
+            message: 'Unauthorized: Invalid or expired token',
         });
     }
 };
 
 // Middleware: Check if user is admin
-export const isAdmin = async (req, res, next) => {
+export const isAdmin = (req, res, next) => {
     try {
         if (req.user && req.user.role === 'admin') {
             return next();
         }
 
         console.warn(
-            `Access denied for user: ${req.user?.id || 'Unknown User'} - Role: ${req.user?.role}`
+            `Access denied for user: ${req.user?.id || 'Unknown'} - Role: ${req.user?.role || 'N/A'}`
         );
 
         return res.status(403).json({
@@ -43,7 +43,7 @@ export const isAdmin = async (req, res, next) => {
         });
     } catch (error) {
         console.error('Admin check error:', error);
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: 'Internal server error',
         });

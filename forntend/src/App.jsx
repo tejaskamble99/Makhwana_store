@@ -13,7 +13,9 @@ import Products from "./components/Products";
 import AuthForm from "./pages/auth/authForm";
 // import Account from "./pages/account"; // ✅ Add this new page
 import { Toaster } from 'react-hot-toast';
-import Dashboard from "./pages/admin/dashboard";
+// import Dashboard from "./pages/admin/dashboard";
+import AddProductPage from "./pages/AddProductPage";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +42,7 @@ function App() {
           <Route path="/authForm" element={<AuthForm onLogin={() => setIsLoggedIn(true)} />} />
           <Route path="/account" element={isLoggedIn ? <h1>Account</h1> : <AuthForm onLogin={() => setIsLoggedIn(true)} />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
-          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/admin/add-product" element={<AddProductPage />} />
         </Routes>
       </main>
 

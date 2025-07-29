@@ -12,11 +12,12 @@ const userSchema = new mongoose.Schema({
         unique: true,
         lowercase: true,
         trim: true,
-        match: [/.+\@.+\..+/, "Please fill a valid email address"]
+        match: [/.+\@.+\..+/, "Please enter a valid email address"]
     },
     password: {
         type: String,
         required: true,
+        // Consider adding `minlength` if you're not hashing immediately
     },
     phone: {
         type: String,
@@ -26,14 +27,13 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
+        trim: true
     },
     role: {
         type: Number,
-        default: 0, // 0: User, 1: Admin
-
-    },
+        default: 0, // 0 = User, 1 = Admin
+        enum: [0, 1] // Prevent invalid values
+    }
 }, { timestamps: true });
-
-
 
 export default mongoose.model('User', userSchema);

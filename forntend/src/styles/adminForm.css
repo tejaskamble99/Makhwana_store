@@ -1,0 +1,13 @@
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.admin-form input,
+.admin-form button {
+  padding: 8px;
+  font-size: 16px;
+}
