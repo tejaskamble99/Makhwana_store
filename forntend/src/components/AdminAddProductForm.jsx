@@ -1,114 +1,182 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useRef } from "react";
 
-const AdminAddProductForm = () => {
-  const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    stock: "",
-    images: [], // Array of Cloudinary URLs
-  });
+export default function AddProductForm() {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [images, setImages] = useState([]); // local preview URLs
+  const [imageUrls, setImageUrls] = useState([]); // uploaded URLs
+  const [uploadProgress, setUploadProgress] = useState({}); // track progress per file
+  const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
-  const [newImageUrl, setNewImageUrl] = useState("");
-  const [uploading, setUploading] = useState(false);
-
-  const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    previewAndUpload(files);
   };
 
-  const handleAddImageUrl = () => {
-    if (newImageUrl.trim()) {
-      setProduct({ ...product, images: [...product.images, newImageUrl.trim()] });
-      setNewImageUrl("");
-    }
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files).filter((file) =>
+      file.type.startsWith("image/")
+    );
+    previewAndUpload(files);
   };
 
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const previewAndUpload = (files) => {
+    setImages((prev) => [...prev, ...files.map((f) => URL.createObjectURL(f))]);
+    uploadImages(files);
+  };
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "your_unsigned_upload_preset"); // ✅ Replace this
-    setUploading(true);
+  const uploadImages = async (files) => {
+    setLoading(true);
+    const urls = [...imageUrls];
 
-    try {
-      const res = await axios.post("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", formData); // ✅ Replace this
-      const url = res.data.secure_url;
-      setProduct((prev) => ({ ...prev, images: [...prev.images, url] }));
-    } catch (err) {
-      console.error("Upload Error:", err);
-      alert("Image upload failed.");
-    } finally {
-      setUploading(false);
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "ecommerce_upload");
+      formData.append("cloud_name", "dnbaykzsg");
+
+      const xhr = new XMLHttpRequest();
+      xhr.open(
+        "POST",
+        "https://api.cloudinary.com/v1_1/dnbaykzsg/image/upload"
+      );
+
+      xhr.upload.addEventListener("progress", (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          setUploadProgress((prev) => ({
+            ...prev,
+            [file.name]: percent,
+          }));
+        }
+      });
+
+      xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText);
+        urls.push(res.secure_url);
+        setImageUrls(urls);
+        if (urls.length === imageUrls.length + files.length) {
+          setLoading(false);
+        }
+      };
+
+      xhr.send(formData);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+
+    if (!name || !price || !description || imageUrls.length === 0) {
+      alert("Please fill all fields and upload at least one image.");
+      return;
+    }
+
+    const newProduct = { name, price, description, images: imageUrls };
 
     try {
-      const res = await axios.post("http://localhost:5000/api/products", product, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const res = await fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct),
       });
-      alert("Product added successfully!");
-      setProduct({
-        name: "",
-        description: "",
-        price: "",
-        category: "",
-        stock: "",
-        images: [],
-      });
-    } catch (err) {
-      console.error(err.response?.data || err);
-      alert("Failed to add product.");
+
+      if (res.ok) {
+        alert("Product added successfully!");
+        setName("");
+        setPrice("");
+        setDescription("");
+        setImages([]);
+        setImageUrls([]);
+        setUploadProgress({});
+      } else {
+        alert("Failed to add product");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4">
-      <input type="text" name="name" placeholder="Product Name" value={product.name} onChange={handleChange} className="border p-2 w-full" required />
-      <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} className="border p-2 w-full" required />
-      <input type="number" name="price" placeholder="Price" value={product.price} onChange={handleChange} className="border p-2 w-full" required />
-      <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} className="border p-2 w-full" required />
-      <input type="number" name="stock" placeholder="Stock Quantity" value={product.stock} onChange={handleChange} className="border p-2 w-full" required />
+    <form onSubmit={handleSubmit} style={{ maxWidth: "500px", margin: "auto" }}>
+      <h2>Add Product</h2>
 
-      <div className="space-y-2">
-        <label className="block font-semibold">Add Image URL</label>
-        <div className="flex gap-2">
-          <input type="text" placeholder="https://..." value={newImageUrl} onChange={(e) => setNewImageUrl(e.target.value)} className="border p-2 flex-1" />
-          <button type="button" onClick={handleAddImageUrl} className="bg-gray-700 text-white px-4 py-2 rounded">
-            Add
-          </button>
-        </div>
+      <label>Product Name:</label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+
+      <label>Price:</label>
+      <input
+        type="number"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
+        required
+      />
+
+      <label>Description:</label>
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+      />
+
+      <label>Upload Images:</label>
+      <div
+        onDrop={handleDrop}
+        onDragOver={(e) => e.preventDefault()}
+        style={{
+          border: "2px dashed #ccc",
+          padding: "20px",
+          textAlign: "center",
+          borderRadius: "8px",
+          cursor: "pointer",
+          marginBottom: "10px",
+        }}
+        onClick={() => fileInputRef.current.click()}
+      >
+        Drag & Drop images here or click to browse
       </div>
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        style={{ display: "none" }}
+        ref={fileInputRef}
+        onChange={handleFileChange}
+      />
 
-      <div className="space-y-2">
-        <label className="block font-semibold">Or Upload Image</label>
-        <input type="file" accept="image/*" onChange={handleImageUpload} className="border p-2 w-full" />
-        {uploading && <p className="text-sm text-blue-500">Uploading...</p>}
-      </div>
+      {loading &&
+        Object.entries(uploadProgress).map(([fileName, progress]) => (
+          <div key={fileName}>
+            <p>{fileName}</p>
+            <progress value={progress} max="100">{progress}%</progress>
+          </div>
+        ))}
 
-      {/* Preview Carousel */}
-      {product.images.length > 0 && (
-        <div className="flex gap-2 overflow-x-auto py-2">
-          {product.images.map((img, idx) => (
-            <img key={idx} src={img} alt={`Preview ${idx}`} className="w-20 h-20 object-cover border rounded" />
+      {images.length > 0 && (
+        <div style={{ display: "flex", gap: "10px", overflowX: "auto" }}>
+          {images.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt="preview"
+              style={{ width: "100px", borderRadius: "8px" }}
+            />
           ))}
         </div>
       )}
 
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-        Add Product
+      <button type="submit" disabled={loading}>
+        {loading ? "Uploading..." : "Add Product"}
       </button>
     </form>
   );
-};
-
-export default AdminAddProductForm;
+}
